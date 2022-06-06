@@ -1,0 +1,69 @@
+GET http://localhost:5000/products
+
+#####
+GET http://localhost:5000/product/1
+
+#####
+POST http://localhost:5000/product
+Content-Type: application/json
+
+{
+    "title": "Itis",
+    "price": 766
+}
+
+#####
+PATCH http://localhost:5000/product/1
+Content-Type: application/json
+
+{
+    "title": "Product 1 Updated",
+    "price": 899
+}
+
+#####
+DELETE http://localhost:5000/product/25
+
+
+
+##### users
+GET http://localhost:5000/mahasiswa
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWhhc2lzd2FJZCI6MSwibmltIjoyNDMyMzUzNDUsInVzZXJOYW1lIjoiemFpbmluaXphcjIyIiwiaWF0IjoxNjU0NDUwOTcwLCJleHAiOjE2NTQ0NTA5OTB9.-qrwuCvhbYKkoJ_nh8nBdY9Ktxn2CnzXvA2flYFJGoU
+
+#####
+POST http://localhost:5000/mahasiswa
+Content-Type: multipart/form-data; charset=utf-8; boundary="another cool boundary"
+
+--another cool boundary
+Content-Disposition: form-data; name="foo"
+
+bar
+--another cool boundary
+Content-Disposition: form-data; name="baz"
+
+quux
+--another cool boundary--
+
+{
+    "nama_mahasiswa": "Ahmad Zaini Nijar",
+    "nim": "243235345",
+    "image": "zaininizar.jpg",
+    "username": "zaininizar22",
+    "password": "zaininizar0809",
+    "confPassword": "zaininizar0809"
+}
+
+#####
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "username": "zaininizar22",
+    "password": "zaininizar0809"
+}
+
+######
+GET http://localhost:5000/token
+
+######
+DELETE http://localhost:5000/Logout
