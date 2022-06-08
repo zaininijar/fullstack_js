@@ -32,17 +32,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYWhhc2lzd2FJZCI6M
 
 #####
 POST http://localhost:5000/mahasiswa
-Content-Type: multipart/form-data; charset=utf-8; boundary="another cool boundary"
-
---another cool boundary
-Content-Disposition: form-data; name="foo"
-
-bar
---another cool boundary
-Content-Disposition: form-data; name="baz"
-
-quux
---another cool boundary--
+Content-Type: application/json
 
 {
     "nama_mahasiswa": "Ahmad Zaini Nijar",
@@ -62,8 +52,17 @@ Content-Type: application/json
     "password": "zaininizar0809"
 }
 
+#####
+POST https://zaininizar22-backend.mdbgo.io/login
+Content-Type: application/json
+
+{
+    "username": "zaininizar22",
+    "password": "zaininizar0809"
+}
+
 ######
 GET http://localhost:5000/token
 
 ######
-DELETE http://localhost:5000/Logout
+DELETE http://localhost:5000/logout

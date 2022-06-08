@@ -15,16 +15,16 @@ export const getMahasiswa = async (req, res) => {
 
 export const Register = async (req, res) => {
 
-  const nama_mahasiswa = req.body.nama_mahasiswa;
+  const nama_mahasiswa = req.body.namaMahasiswa;
   const nim = req.body.nim;
   const username = req.body.username;
   const password = req.body.password;
   const confPassword = req.body.confPassword;
-
+  
   var error = {};
   
   if (!nama_mahasiswa) {
-    error['nama_mahasiswa'] = "Nama mahasiswa tidak boleh kosong";
+    error['namaMahasiswa'] = "Nama mahasiswa tidak boleh kosong";
   }
   
   if (!nim) {
@@ -32,7 +32,7 @@ export const Register = async (req, res) => {
   }
   
   if (!req.file) {
-    error['foto_mahasiswa'] = "Foto mahasiswa tidak boleh kosong ya";
+    error['fotoMahasiswa'] = "Foto mahasiswa tidak boleh kosong ya";
   }
   
   if (!username) {
@@ -56,6 +56,7 @@ export const Register = async (req, res) => {
       .status(400)
       .json({ msg: error });
   }
+
 
   const image = req.file.path;
   console.log(image);

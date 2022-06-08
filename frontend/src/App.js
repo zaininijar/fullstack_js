@@ -3,8 +3,8 @@ import "./index.css";
 import ProductList from "./components/ProductList";
 import AddProduct from "./components/AddProduct";
 import EditeProduct from "./components/EditeProduct";
-import Login from "./components/Login";
-import Register from "./components/Register";
+import Login from "./pages/auth/Login";
+import Register from "./pages/auth/Register";
 import Dashboard from "./components/Dashboard";
 import Navbar from "./components/Navbar";
 
