@@ -22,7 +22,7 @@ const Login = () => {
         </div>
       </div>
       <div className="flex w-1/2 justify-center items-center bg-white">
-        <FormLogin/>
+        <FormLogin />
       </div>
     </div>
   );

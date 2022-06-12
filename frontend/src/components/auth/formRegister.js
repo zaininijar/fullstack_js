@@ -14,6 +14,7 @@ const Form = (props) => {
   const [username, setUsername] = useState({ value: "", msgError: "" });
   const [password, setPassword] = useState({ value: "", msgError: "" });
   const [confPassword, setConfPassword] = useState({ value: "", msgError: "" });
+  const [files, initFiles] = useState([]);
 
   const handleName = (value) => {
     if (value === "" || value.length > 30) {
@@ -49,7 +50,8 @@ const Form = (props) => {
     }
   };
 
-  const handleImage = (value) => {
+  const handleFileInput = (value) => {
+    return console.log(value);
     if (value === null) {
       let message = "";
 
@@ -59,10 +61,6 @@ const Form = (props) => {
 
       if (!image.name.match(/\.(jpg|jpeg|png)$/)) {
         message = "Hanya menerima inputan dengan format .jpg, .jpeg, dan .png";
-      }
-
-      if (image.size > 500000) {
-        message = "Ukuran maksimal 500 kB";
       }
 
       setImage((prev) => ({ ...prev, msgError: message }));
@@ -191,7 +189,7 @@ const Form = (props) => {
         }
       );
 
-      if (response.status == 200) {
+      if (response.status === 200) {
         navigate("/login");
       }
     } catch (error) {
@@ -202,8 +200,8 @@ const Form = (props) => {
   };
 
   return (
-    <div>
-      <form onSubmit={Register} className="bg-white w-full">
+    <div className="w-full">
+      <form onSubmit={Register} className="bg-white w-full px-24 lg:px-32">
         <h1 className="text-gray-800 font-bold text-2xl mb-1">Hello Again!</h1>
         <p className="text-sm font-normal text-gray-600 mb-7">Welcome Back</p>
         <p className="text-sm font-normal text-red-600 mb-7"></p>
@@ -343,7 +341,7 @@ const Form = (props) => {
           Forgot Password ?
         </span>
       </form>
-      {/* <pre>{JSON.stringify(msg, null, 2)}</pre> */}
+      {/* <pre>{files && JSON.stringify(files, null, 2)}</pre> */}
     </div>
   );
 };
