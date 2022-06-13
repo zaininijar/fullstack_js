@@ -8,16 +8,18 @@ import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 registerPlugin(FilePondPluginFileValidateSize, FilePondPluginImagePreview);
 
 const InputFile = (props) => {
-  const [files, initFiles] = useState([]);
+  const {setFile} = props
   return (
     <>
       <FilePond
-        files={files}
         allowFileSizeValidation={true}
         maxFileSize={500000}
         labelMaxFileSizeExceeded={"File is too large"}
+        onupdatefiles={fileItems => {
+          console.log("fileItems", fileItems[0].file)
+          setFile(fileItems[0].file)
+        }}
       />
-      <pre>{files && JSON.stringify(files, null, 2)}</pre>
     </>
   );
 };

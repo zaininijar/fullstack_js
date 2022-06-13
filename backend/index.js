@@ -5,7 +5,6 @@ import router from "./routes/index.js";
 import cors from "cors";
 import multer from "multer";
 import Mahasiswa from "./models/MahasiswaModel.js";
-import Products from "./models/productModel.js";
 import cookieParser from "cookie-parser";
 import path from "path";
 import { fileURLToPath } from 'url';
@@ -21,8 +20,7 @@ const app = express();
 try {
   await db.authenticate();
   console.log("database connected...");
-  // await Mahasiswa.sync();
-  // await Products.sync();
+  await Mahasiswa.sync();
 } catch (error) {
   console.error("connection error", error);
 }

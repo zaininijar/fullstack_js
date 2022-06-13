@@ -10,11 +10,11 @@ import InputFile from "../form/inputFile";
 const Form = (props) => {
   const [name, setName] = useState({ value: "", msgError: "" });
   const [nim, setNim] = useState({ value: "", msgError: "" });
-  const [image, setImage] = useState({ value: null, msgError: "" });
+  // const [image, setImage] = useState({ value: null, msgError: "" });
   const [username, setUsername] = useState({ value: "", msgError: "" });
   const [password, setPassword] = useState({ value: "", msgError: "" });
   const [confPassword, setConfPassword] = useState({ value: "", msgError: "" });
-  const [files, initFiles] = useState([]);
+  const [images, setImages] = useState(null);
 
   const handleName = (value) => {
     if (value === "" || value.length > 30) {
@@ -51,26 +51,29 @@ const Form = (props) => {
   };
 
   const handleFileInput = (value) => {
-    return console.log(value);
-    if (value === null) {
-      let message = "";
+    // if (value === null) {
+    //   let message = "";
 
-      if (value === "") {
-        message = "Foto tidak boleh kosong";
-      }
+    //   if (value === "") {
+    //     message = "Foto tidak boleh kosong";
+    //   }
 
-      if (!image.name.match(/\.(jpg|jpeg|png)$/)) {
-        message = "Hanya menerima inputan dengan format .jpg, .jpeg, dan .png";
-      }
+    //   if (!image.name.match(/\.(jpg|jpeg|png)$/)) {
+    //     message = "Hanya menerima inputan dengan format .jpg, .jpeg, dan .png";
+    //   }
 
-      setImage((prev) => ({ ...prev, msgError: message }));
-    } else {
-      setImage({ msgError: "", value: value });
-    }
+    //   setImage((prev) => ({ ...prev, msgError: message }));
+    // } else {
+    //   setImage({ msgError: "", value: value });
+    // }
+
+    // console.log(value.file);
+    // setImage({ msgError: "", value: value });
+
   };
 
   const handleUsername = (value) => {
-    if (value === "" || !new RegExp(/^[a-z]*$/).test(value)) {
+    if (value === "" || new RegExp(/^[a-z]*$/).test(value)) {
       let message = "";
       if (value === "") {
         message = "Username kosong";
@@ -123,34 +126,15 @@ const Form = (props) => {
   };
 
   const handleConfPassword = (value) => {
+    debugger
     if (
       value === "" ||
-      !new RegExp("^(?=.{8,})").test(value) ||
-      !new RegExp("^(?=.*[a-z])(?=.*[A-Z])").test(value) ||
-      !new RegExp("^(?=.*[0-9])").test(value) ||
-      !new RegExp("^(?=.*[!@#$%^&*])").test(value) ||
-      password !== value
+      password.value !== value
     ) {
       let message = "";
 
       if (value === "") {
         message = "Password harus terisi";
-      }
-
-      if (!new RegExp("^(?=.*[0-9])").test(value)) {
-        message = "Minimal 1 angka";
-      }
-
-      if (!new RegExp("^(?=.*[a-z])(?=.*[A-Z])").test(value)) {
-        message = "Harus memiliki kombinasi huruf besar dan huruf kecil";
-      }
-
-      if (!new RegExp("^(?=.*[!@#$%^&*])").test(value)) {
-        message = "Minimal 1 karakter spesial";
-      }
-
-      if (!new RegExp("^(?=.{8,})").test(value)) {
-        message = "Minimal 8 karakter";
       }
 
       if (password !== value) {
@@ -170,13 +154,13 @@ const Form = (props) => {
   const Register = async (e) => {
     e.preventDefault();
     let formData = new FormData();
-
-    formData.append("namaMahasiswa", name);
-    formData.append("nim", nim);
-    formData.append("image", image);
-    formData.append("username", username);
-    formData.append("password", password);
-    formData.append("confPassword", confPassword);
+    debugger
+    formData.append("namaMahasiswa", name.value);
+    formData.append("nim", nim.value);
+    formData.append("image", images);
+    formData.append("username", username.value);
+    formData.append("password", password.value);
+    formData.append("confPassword", confPassword.value);
 
     try {
       const response = await axios.post(
@@ -252,7 +236,7 @@ const Form = (props) => {
           )}
         </div>
         <div className="mb-4">
-          <InputFile />
+          <InputFile setFile={setImages} />
         </div>
         <div className="mb-4">
           <FormControl>

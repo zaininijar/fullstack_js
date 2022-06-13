@@ -1,8 +1,8 @@
 import axios from "axios";
 import React from "react";
-import { useNavigate } from "react-router-dom";
-
-const Navbar = () => {
+import PropTypes from "prop-types";
+import { useNavigate, NavLink } from "react-router-dom";
+const Navbar = ({isActive}) => {
   const navigate = useNavigate();
   const Logout = async () => {
     try {
@@ -14,52 +14,39 @@ const Navbar = () => {
   };
 
   return (
-    <nav
-      className="navbar is-light"
-      role="navigation"
-      aria-label="main navigation"
-    >
-      <div className="container">
-        <div className="navbar-brand">
-          <a className="navbar-item" href="https://bulma.io">
-            <img
-              src="https://bulma.io/images/bulma-logo.png"
-              width="112"
-              height="28"
-            />
-          </a>
-
-          <a
-            role="button"
-            className="navbar-burger burger"
-            aria-label="menu"
-            aria-expanded="false"
-            data-target="navbarBasicExample"
-          >
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
-
-        <div id="navbarBasicExample" className="navbar-menu">
-          <div className="navbar-start">
-            <a className="navbar-item">Home</a>
-          </div>
-
-          <div className="navbar-end">
-            <div className="navbar-item">
-              <div className="buttons">
-                <button onClick={Logout} className="button is-light">
-                  Log Out
-                </button>
-              </div>
+    <header>
+        <nav className="w-full">
+          <div className="flex justify-center w-full px-16 py-8">
+            <div>
+              <ul className="flex md:space-y-0 md:space-x-6 text-xl md:text-2xl">
+                <li>
+                  <NavLink
+                    to="/home"
+                    className={"hover:underline" + ((isActive === "home") ? " underline" : "")}
+                  >
+                    Home
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="/profile"
+                    className={"hover:underline" + ((isActive === "profile") ? " underline" : "")}
+                  >
+                    Profile
+                  </NavLink>
+                </li>
+                <li>
+                  <button onClick={Logout} className="button is-light hover:underline">
+                    Log Out
+                  </button>
+                </li>
+              </ul>
             </div>
           </div>
-        </div>
-      </div>
-    </nav>
+        </nav>
+      </header>
   );
 };
 
+Navbar.propTypes = {};
 export default Navbar;

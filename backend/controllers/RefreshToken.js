@@ -18,11 +18,13 @@ export const refreshToken = async (req, res) => {
       (err, decoded) => {
         if (err) return res.sendStatus(403);
         const mahasiswaId = mahasiswa[0].id;
-        const nim = mahasiswa[0].namaMahasiswa;
+        const namaMahasiswa = mahasiswa[0].nama_mahasiswa;
+        const nim = mahasiswa[0].nim;
+        const fotoMahasiswa = process.env.APP_URL + mahasiswa[0].foto_mahasiswa;
         const userName = mahasiswa[0].username;
 
         const accessToken = jwt.sign(
-          { mahasiswaId, nim, userName },
+          { mahasiswaId, namaMahasiswa, nim, fotoMahasiswa, userName},
           process.env.ACCESS_TOKEN_SECRET,
           {
             expiresIn: "15s",

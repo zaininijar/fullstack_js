@@ -19,7 +19,7 @@ const FormLogin = (props) => {
 
     try {
       await axios.post("http://localhost:5000/login", form).then((e) => {
-        navigate("/dashboard");
+        navigate("/home");
       });
     } catch (error) {
       setMsg(error.response.data.msg);
