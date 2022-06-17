@@ -17,13 +17,16 @@ const Form = (props) => {
   const [images, setImages] = useState(null);
 
   const handleName = (value) => {
-    if (value === "" || value.length > 30) {
+    if (value === "" || value.length > 30 || !new RegExp(/\D/).test(value)) {
       let message = "";
       if (value === "") {
         message = "nama kosong";
       }
       if (value.length > 30) {
         message = "maksinal 30";
+      }
+      if (!new RegExp(/\D/).test(value)) {
+        message = "Tidak boleh hanya angka";
       }
       setName((prev) => ({ ...prev, msgError: message }));
     } else {
@@ -50,37 +53,19 @@ const Form = (props) => {
     }
   };
 
-  const handleFileInput = (value) => {
-    // if (value === null) {
-    //   let message = "";
-
-    //   if (value === "") {
-    //     message = "Foto tidak boleh kosong";
-    //   }
-
-    //   if (!image.name.match(/\.(jpg|jpeg|png)$/)) {
-    //     message = "Hanya menerima inputan dengan format .jpg, .jpeg, dan .png";
-    //   }
-
-    //   setImage((prev) => ({ ...prev, msgError: message }));
-    // } else {
-    //   setImage({ msgError: "", value: value });
-    // }
-
-    // console.log(value.file);
-    // setImage({ msgError: "", value: value });
-
-  };
-
   const handleUsername = (value) => {
-    if (value === "" || new RegExp(/^[a-z]*$/).test(value)) {
+    if (value === "" || !new RegExp(/^[a-z0-9]*$/).test(value) || value === "bob") {
       let message = "";
       if (value === "") {
         message = "Username kosong";
       }
 
-      if (new RegExp(/^[a-zA-Z]+$/).test(value)) {
+      if (!new RegExp(/^[a-z0-9]*$/).test(value)) {
         message = "Harus huruf kecil";
+      }
+
+      if (value === "bob") {
+        message = "Tidak boleh hanya kata bob,";
       }
 
       setUsername((prev) => ({ ...prev, msgError: message }));
