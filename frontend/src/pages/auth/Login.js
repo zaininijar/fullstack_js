@@ -5,7 +5,7 @@ import FormLogin from "../../components/auth/formLogin";
 const Login = () => {
   return (
     <div className="h-screen flex">
-      <div className="flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center">
+      <div className="w-1/2 hidden px-16 md:flex bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center">
         <div>
           <h1 className="text-white font-bold text-4xl font-sans">
             Lorem ipsum
@@ -21,7 +21,7 @@ const Login = () => {
           </Link>
         </div>
       </div>
-      <div className="flex w-1/2 justify-center items-center bg-white">
+      <div className="flex w-full md:w-1/2 justify-center items-center bg-white">
         <FormLogin />
       </div>
     </div>

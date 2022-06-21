@@ -21,7 +21,7 @@ const Register = () => {
           </Link>
         </div>
       </div>
-      <div className="flex w-full md:w-1/2 justify-center items-center bg-white">
+      <div className="flex w-full md:w-1/2 justify-center items-center bg-white overflow-y-auto">
         <AuthForm onSubmit={Register} />
       </div>
     </div>

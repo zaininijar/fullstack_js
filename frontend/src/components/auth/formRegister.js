@@ -20,13 +20,17 @@ const Form = (props) => {
     if (value === "" || value.length > 30 || !new RegExp(/\D/).test(value)) {
       let message = "";
       if (value === "") {
-        message = "nama kosong";
+        message = "Nama tidak boleh kosong";
       }
       if (value.length > 30) {
         message = "maksinal 30";
       }
       if (!new RegExp(/\D/).test(value)) {
-        message = "Tidak boleh hanya angka";
+        if (value === "") {
+          message = "Nama tidak boleh kosong";
+        } else {
+          message = "Tidak boleh hanya angka";
+        }
       }
       setName((prev) => ({ ...prev, msgError: message }));
     } else {
@@ -54,7 +58,11 @@ const Form = (props) => {
   };
 
   const handleUsername = (value) => {
-    if (value === "" || !new RegExp(/^[a-z0-9]*$/).test(value) || value === "bob") {
+    if (
+      value === "" ||
+      !new RegExp(/^[a-z0-9]*$/).test(value) ||
+      value === "bob"
+    ) {
       let message = "";
       if (value === "") {
         message = "Username kosong";
@@ -111,11 +119,8 @@ const Form = (props) => {
   };
 
   const handleConfPassword = (value) => {
-    debugger
-    if (
-      value === "" ||
-      password.value !== value
-    ) {
+    debugger;
+    if (value === "" || password.value !== value) {
       let message = "";
 
       if (value === "") {
@@ -132,6 +137,23 @@ const Form = (props) => {
     }
   };
 
+  const showPassword = () => {
+    var x = document.getElementById("password");
+    var y = document.getElementById("confPassword");
+
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+
+    if (y.type === "password") {
+      y.type = "text";
+    } else {
+      y.type = "password";
+    }
+  };
+
   const navigate = useNavigate();
 
   const [msg, setMsg] = useState("");
@@ -139,7 +161,7 @@ const Form = (props) => {
   const Register = async (e) => {
     e.preventDefault();
     let formData = new FormData();
-    debugger
+    debugger;
     formData.append("namaMahasiswa", name.value);
     formData.append("nim", nim.value);
     formData.append("image", images);
@@ -169,10 +191,12 @@ const Form = (props) => {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full my-16">
       <form onSubmit={Register} className="bg-white w-full px-24 lg:px-32">
-        <h1 className="text-gray-800 font-bold text-2xl mb-1">Hello Again!</h1>
-        <p className="text-sm font-normal text-gray-600 mb-7">Welcome Back</p>
+        <h1 className="text-gray-800 font-bold text-2xl mb-1">Hallo Semua!</h1>
+        <p className="text-sm font-normal text-gray-600 mb-7">
+          Yuk daftar akun kamu
+        </p>
         <p className="text-sm font-normal text-red-600 mb-7"></p>
         <div className="mb-4">
           <FormControl>
@@ -267,6 +291,7 @@ const Form = (props) => {
               placeholder="Password"
               name="password"
               type="password"
+              id="password"
               onChange={(e) => {
                 handlePassword(e.target.value);
               }}
@@ -294,6 +319,7 @@ const Form = (props) => {
               placeholder="Konfirmasi Password"
               name="confPassword"
               type="password"
+              id="confPassword"
               onChange={(e) => {
                 handleConfPassword(e.target.value);
               }}
@@ -304,6 +330,10 @@ const Form = (props) => {
               {confPassword.msgError}
             </div>
           )}
+        </div>
+        <div className="flex items-center ml-2">
+          <input type="checkbox" onClick={showPassword} />
+          <div className="text-xs ml-2">Show Password</div>
         </div>
         <Button type="submit">Daftar</Button>
         <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer">

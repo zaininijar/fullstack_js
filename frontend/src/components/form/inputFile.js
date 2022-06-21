@@ -11,7 +11,8 @@ const InputFile = (props) => {
   const {setFile} = props
   return (
     <>
-      <FilePond
+      <FilePond 
+        labelIdle='Drag & Drop foto kamu disini <span class="filepond--label-action">Browse</span>'
         allowFileSizeValidation={true}
         maxFileSize={500000}
         labelMaxFileSizeExceeded={"File is too large"}
