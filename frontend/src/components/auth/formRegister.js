@@ -17,11 +17,21 @@ const Form = (props) => {
   const [images, setImages] = useState(null);
 
   const handleName = (value) => {
-    if (value === "" || value.length > 30 || !new RegExp(/\D/).test(value)) {
+    if (
+      value === "" ||
+      value.length > 30 ||
+      !new RegExp(/\D/).test(value) ||
+      value === "bob"
+    ) {
       let message = "";
       if (value === "") {
         message = "Nama tidak boleh kosong";
       }
+
+      if (value === "bob") {
+        message = "Tidak boleh hanya kata bob,";
+      }
+
       if (value.length > 30) {
         message = "maksinal 30";
       }
@@ -58,11 +68,7 @@ const Form = (props) => {
   };
 
   const handleUsername = (value) => {
-    if (
-      value === "" ||
-      !new RegExp(/^[a-z0-9]*$/).test(value) ||
-      value === "bob"
-    ) {
+    if (value === "" || !new RegExp(/^[a-z0-9]*$/).test(value)) {
       let message = "";
       if (value === "") {
         message = "Username kosong";
@@ -70,10 +76,6 @@ const Form = (props) => {
 
       if (!new RegExp(/^[a-z0-9]*$/).test(value)) {
         message = "Harus huruf kecil";
-      }
-
-      if (value === "bob") {
-        message = "Tidak boleh hanya kata bob,";
       }
 
       setUsername((prev) => ({ ...prev, msgError: message }));
